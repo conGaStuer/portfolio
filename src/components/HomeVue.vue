@@ -57,14 +57,50 @@
         </div>
       </transition-group>
     </section>
-    <section class="w-full h-screen bg-slate-100">
+    <section class="w-full h-lvh">
       <div
-        class="w-full h-40 m-auto pl-10 pr-10 flex justify-between items-center border-t-2 border-b-2 border-gray-300"
+        class="w-full h-40 m-auto pl-10 pr-10 flex justify-between items-center border-t-2 border-b-2 border-t-hidden border-b-hidden"
       >
-        <span class="text-4xl text-gray-600 font-bold">/02</span>
-        <span class="text-8xl text-white font-extrabold hover:text-gray-700"
+        <span class="text-4xl text-hidden font-bold">/02</span>
+        <span class="text-8xl text-white font-extrabold hover:text-textHidden"
           >Works</span
         >
+      </div>
+      <div class="w-full h-2vh flex justify-center items-center">
+        <div class="w-4/5 h-95 flex justify-between items-center">
+          <div
+            class="w-42 h-90 relative bottom-20 flex flex-col justify-between items-center"
+          >
+            <div class="image">
+              <span class="font-bold text-4xl trans -mr-16 text-textHidden"
+                >/001</span
+              >
+              <div class="w-90 full wrapper1"></div>
+            </div>
+            <div class="image">
+              <span class="font-bold text-4xl trans -mr-16 text-textHidden"
+                >/002</span
+              >
+              <div class="w-90 full wrapper2"></div>
+            </div>
+          </div>
+          <div
+            class="w-42 h-90 relative top-20 flex flex-col justify-between items-center"
+          >
+            <div class="image">
+              <span class="font-bold text-4xl trans -mr-16 text-textHidden"
+                >/003</span
+              >
+              <div class="w-90 full wrapper3"></div>
+            </div>
+            <div class="image">
+              <span class="font-bold text-4xl trans -mr-16 text-textHidden"
+                >/004</span
+              >
+              <div class="w-90 full wrapper4"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -72,8 +108,8 @@
 
 <script>
 import { gsap } from "gsap";
-import { ref } from "vue";
-
+import { ref, onMounted } from "vue";
+import hoverEffect from "hover-effect";
 export default {
   setup() {
     const logo = (el) => {
@@ -146,9 +182,44 @@ export default {
         duration: 0.5,
         ease: "power1.in",
         opacity: 1,
-        delay: el.dataset.index * 0.2,
+        delay: el.dataset.index * 0.4,
       });
     };
+    onMounted(() => {
+      const liquid1 = new hoverEffect({
+        parent: document.querySelector(".wrapper1"),
+        intensity: 0.5,
+        image1: "http://localhost/Portfolio/portfolio/src/assets/cosmic1.jpg",
+        image2: "http://localhost/Portfolio/portfolio/src/assets/cosmic2.jpg",
+        displacementImage:
+          "http://localhost/Portfolio/portfolio/src/assets/dis.jpg",
+      });
+      const liquid2 = new hoverEffect({
+        parent: document.querySelector(".wrapper2"),
+        intensity: 0.5,
+        image1: "http://localhost/Portfolio/portfolio/src/assets/girl1.jpg",
+        image2: "http://localhost/Portfolio/portfolio/src/assets/girl2.jpg",
+        displacementImage:
+          "http://localhost/Portfolio/portfolio/src/assets/dis.jpg",
+      });
+      const liquid3 = new hoverEffect({
+        parent: document.querySelector(".wrapper3"),
+        intensity: 0.5,
+
+        image1: "http://localhost/Portfolio/portfolio/src/assets/phone1.jpg",
+        image2: "http://localhost/Portfolio/portfolio/src/assets/phone2.jpg",
+        displacementImage:
+          "http://localhost/Portfolio/portfolio/src/assets/dis.jpg",
+      });
+      const liquid4 = new hoverEffect({
+        parent: document.querySelector(".wrapper4"),
+        intensity: 0.5,
+        image1: "http://localhost/Portfolio/portfolio/src/assets/planet1.jpg",
+        image2: "http://localhost/Portfolio/portfolio/src/assets/planet2.jpg",
+        displacementImage:
+          "http://localhost/Portfolio/portfolio/src/assets/dis.jpg",
+      });
+    });
     return {
       logo,
       rotate,
