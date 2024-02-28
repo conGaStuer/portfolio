@@ -1,5 +1,5 @@
 <template>
-  <main class="w-screen h-screen yes">
+  <main class="w-full h-screen yes">
     <nav
       class="w-full h-20 text-white uppercase flex justify-between items-center font-bold text-3xl p-12 relative top-4"
     >
@@ -9,7 +9,7 @@
 
       <div class="tracking-widest">...</div>
     </nav>
-    <section class="w-screen h-screen">
+    <section class="w-full h-screen">
       <Transition appear @enter="intro" @before-enter="introBefore">
         <div
           class="w-4/6 h-80 mx-auto relative top-20 right-24 text-white flex flex-col justify-between text-8xl"
@@ -79,13 +79,30 @@
             <span class="font-bold text-4xl trans -mr-16 text-textHidden"
               >/001</span
             >
-            <div class="w-90 full wrapper1"></div>
+
+            <div class="w-90 full wrapper1">
+              <span class="mb-5 text-textHidden relative z-10">
+                <a href="https://haerinshop.netlify.app/" target="_blank">
+                  Demo</a
+                >
+              </span>
+            </div>
           </div>
+
           <div class="image">
             <span class="font-bold text-4xl trans -mr-16 text-textHidden"
               >/002</span
             >
-            <div class="w-90 full wrapper2"></div>
+            <div class="w-90 full wrapper2">
+              <span class="mb-5 text-textHidden relative z-10">
+                <a
+                  href="https://doanchuyennganh-vuejs-php.netlify.app/"
+                  target="_blank"
+                >
+                  Demo</a
+                >
+              </span>
+            </div>
           </div>
         </div>
         <div
@@ -95,13 +112,28 @@
             <span class="font-bold text-4xl trans -mr-16 text-textHidden"
               >/003</span
             >
-            <div class="w-90 full wrapper3"></div>
+            <div class="w-90 full wrapper3">
+              <span class="mb-5 text-textHidden relative z-10">
+                <a
+                  href="https://newjeans-music-app.netlify.app/"
+                  target="_blank"
+                >
+                  Demo</a
+                >
+              </span>
+            </div>
           </div>
           <div class="image">
             <span class="font-bold text-4xl trans -mr-16 text-textHidden"
               >/004</span
             >
-            <div class="w-90 full wrapper4"></div>
+            <div class="w-90 full wrapper4">
+              <span class="mb-5 text-textHidden relative z-10">
+                <a href="https://rehtaew-app.netlify.app/" target="_blank">
+                  Demo</a
+                >
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -184,6 +216,7 @@
         </div>
       </Transition>
     </div>
+
     <Transition appear>
       <section class="w-90 h-3/2vh flex justify-center items-center m-auto">
         <transition-group
@@ -197,20 +230,81 @@
             v-for="(skill, index) in skills"
             :key="skill.id"
             :data-index="index"
-            class="w-full h-80 bg-black border-t-2 border-t-white flex justify-around items-center p-3"
+            class="w-full h-72 bg-black border-t-2 border-t-white flex justify-around items-center p-3 hover:bg-white transition duration-500 hover:text-black"
           >
             <div class="text-white w-2/6 flex justify-center items-center mr-2">
               <img :src="skill.img" alt="" width="70px" height="200px" />
             </div>
             <div class="w-4/5">
               <div class="text-textHidden mb-2">{{ skill.number }}</div>
-              <div class="text-white mb-2">{{ skill.skill }}</div>
+              <div class="text-white mb-2">
+                {{ skill.skill }}
+              </div>
               <div class="text-textHidden">{{ skill.descrip }}</div>
             </div>
           </div>
         </transition-group>
       </section>
     </Transition>
+    <div
+      class="w-full h-80 mr-auto ml-auto mt-20 pl-10 pr-10 flex items-center justify-end border-t-2 border-b-2 border-t-hidden border-b-hidden"
+    >
+      <Transition appear @before-enter="viewBefore" @enter="view">
+        <div class="float-right text-end tt pr-8">
+          <div key="lorem1x" class="stroke-text text-8xl">Steps Create</div>
+          <div key="lorem2x" class="text-white text-8xl">Project</div>
+        </div>
+      </Transition>
+    </div>
+    <section class="w-full h-auto pt-28 pb-28 pl-10 pr-10">
+      <div v-for="(item, index) in items" :key="index" class="mb-12">
+        <span class="text-white text-lg">{{ item.number }}</span>
+        <span class="text-6xl stroke-text relative top-10 left-20">{{
+          item.text
+        }}</span>
+        <button
+          @click="toggleCollapse(index)"
+          class="text-white text-6xl float-right relative top-10 right-8"
+        >
+          {{ isOpen ? "-" : "+" }}
+        </button>
+        <div
+          v-show="item.isOpen"
+          class="text-white text-2xl relative top-28 pb-28 transition duration-500"
+        >
+          <!-- Collapsible content goes here -->
+          <p>Nah nah nah nah</p>
+        </div>
+      </div>
+    </section>
+    <div
+      class="w-full h-40 m-auto pl-10 pr-10 flex justify-between items-center border-t-2 border-b-2 border-t-hidden border-b-hidden"
+    >
+      <span class="text-4xl text-hidden font-bold">/04</span>
+      <Transition appear @before-enter="workBefore" @enter="work">
+        <span
+          class="text-8xl text-white font-extrabold hover:text-textHidden abc"
+          >Contact</span
+        >
+      </Transition>
+    </div>
+    <section class="w-full h-75 flex items-center justify-center">
+      <div class="w-90 h-90">
+        <input type="text" name="" id="" placeholder="Name" class="input" />
+        <input type="text" name="" id="" placeholder="Email" class="input" />
+        <textarea
+          type="text"
+          name=""
+          id=""
+          placeholder="Message"
+          class="h-48 w-full block bg-black text-white placeholder:text-white"
+        ></textarea>
+        <div>
+          <span class="stroke-text text-6xl">Get in touch</span> <br />
+          <span class="text-4xl text-white">khuongtranxuan9@gmail.com</span>
+        </div>
+      </div>
+    </section>
   </main>
 </template>
 
@@ -222,49 +316,59 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 export default {
   setup() {
     gsap.registerPlugin(ScrollTrigger);
-    // onMounted(() => {
-    //   const liquid1 = new hoverEffect({
-    //     parent: document.querySelector(".wrapper1"),
-    //     intensity: 0.5,
-    //     image1: "http://localhost/Portfolio/portfolio/src/assets/cosmic1.jpg",
-    //     image2: "http://localhost/Portfolio/portfolio/src/assets/cosmic2.jpg",
-    //     displacementImage:
-    //       "http://localhost/Portfolio/portfolio/src/assets/dis.jpg",
-    //   });
-    //   const liquid2 = new hoverEffect({
-    //     parent: document.querySelector(".wrapper2"),
-    //     intensity: 0.5,
-    //     image1: "http://localhost/Portfolio/portfolio/src/assets/girl1.jpg",
-    //     image2: "http://localhost/Portfolio/portfolio/src/assets/girl2.jpg",
-    //     displacementImage:
-    //       "http://localhost/Portfolio/portfolio/src/assets/dis.jpg",
-    //   });
-    //   const liquid3 = new hoverEffect({
-    //     parent: document.querySelector(".wrapper3"),
-    //     intensity: 0.5,
+    onMounted(() => {
+      const liquid1 = new hoverEffect({
+        parent: document.querySelector(".wrapper1"),
+        intensity: 0.5,
+        image1:
+          "https://live.staticflickr.com/65535/53544381861_9e6ac1c7ed.jpg",
+        image2:
+          "https://live.staticflickr.com/65535/53543511012_b366ba9db1.jpg",
+        displacementImage:
+          "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f19dc2f7-eebb-4bb0-9e32-f77d0b9301a1/dchk6qb-e81c8d02-e299-424d-a6b0-4dd25d911443.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2YxOWRjMmY3LWVlYmItNGJiMC05ZTMyLWY3N2QwYjkzMDFhMVwvZGNoazZxYi1lODFjOGQwMi1lMjk5LTQyNGQtYTZiMC00ZGQyNWQ5MTE0NDMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.vLtLaWoKAh3a_jKuDAIGp5oXaZsCMP9LzhOCTv5Z_TE",
+      });
+      const liquid2 = new hoverEffect({
+        parent: document.querySelector(".wrapper2"),
+        intensity: 0.5,
+        image1:
+          "https://live.staticflickr.com/65535/53544708919_334dde6c19.jpg",
+        image2:
+          "https://live.staticflickr.com/65535/53543511042_52e2592ebd.jpg",
+        displacementImage:
+          "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f19dc2f7-eebb-4bb0-9e32-f77d0b9301a1/dchk6qb-e81c8d02-e299-424d-a6b0-4dd25d911443.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2YxOWRjMmY3LWVlYmItNGJiMC05ZTMyLWY3N2QwYjkzMDFhMVwvZGNoazZxYi1lODFjOGQwMi1lMjk5LTQyNGQtYTZiMC00ZGQyNWQ5MTE0NDMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.vLtLaWoKAh3a_jKuDAIGp5oXaZsCMP9LzhOCTv5Z_TE",
+      });
+      const liquid3 = new hoverEffect({
+        parent: document.querySelector(".wrapper3"),
+        intensity: 0.5,
 
-    //     image1: "http://localhost/Portfolio/portfolio/src/assets/phone1.jpg",
-    //     image2: "http://localhost/Portfolio/portfolio/src/assets/phone2.jpg",
-    //     displacementImage:
-    //       "http://localhost/Portfolio/portfolio/src/assets/dis.jpg",
-    //   });
-    //   const liquid4 = new hoverEffect({
-    //     parent: document.querySelector(".wrapper4"),
-    //     intensity: 0.5,
-    //     image1: "http://localhost/Portfolio/portfolio/src/assets/planet1.jpg",
-    //     image2: "http://localhost/Portfolio/portfolio/src/assets/planet2.jpg",
-    //     displacementImage:
-    //       "http://localhost/Portfolio/portfolio/src/assets/dis.jpg",
-    //   });
-    //   const liquid5 = new hoverEffect({
-    //     parent: document.querySelector(".person"),
-    //     intensity: 0.5,
-    //     image1: "http://localhost/Portfolio/portfolio/src/assets/planet1.jpg",
-    //     image2: "http://localhost/Portfolio/portfolio/src/assets/planet2.jpg",
-    //     displacementImage:
-    //       "http://localhost/Portfolio/portfolio/src/assets/dis.jpg",
-    //   });
-    // });
+        image1:
+          "https://live.staticflickr.com/65535/53543511052_3e5f837051_n.jpg",
+        image2:
+          "https://live.staticflickr.com/65535/53544816430_dc89e4e3fd_n.jpg",
+        displacementImage:
+          "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f19dc2f7-eebb-4bb0-9e32-f77d0b9301a1/dchk6qb-e81c8d02-e299-424d-a6b0-4dd25d911443.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2YxOWRjMmY3LWVlYmItNGJiMC05ZTMyLWY3N2QwYjkzMDFhMVwvZGNoazZxYi1lODFjOGQwMi1lMjk5LTQyNGQtYTZiMC00ZGQyNWQ5MTE0NDMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.vLtLaWoKAh3a_jKuDAIGp5oXaZsCMP9LzhOCTv5Z_TE",
+      });
+      const liquid4 = new hoverEffect({
+        parent: document.querySelector(".wrapper4"),
+        intensity: 0.5,
+        image1:
+          "https://live.staticflickr.com/65535/53544381791_cb87e91a30_n.jpg",
+        image2:
+          "https://live.staticflickr.com/65535/53544816425_448b8d6086_n.jpg",
+        displacementImage:
+          "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f19dc2f7-eebb-4bb0-9e32-f77d0b9301a1/dchk6qb-e81c8d02-e299-424d-a6b0-4dd25d911443.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2YxOWRjMmY3LWVlYmItNGJiMC05ZTMyLWY3N2QwYjkzMDFhMVwvZGNoazZxYi1lODFjOGQwMi1lMjk5LTQyNGQtYTZiMC00ZGQyNWQ5MTE0NDMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.vLtLaWoKAh3a_jKuDAIGp5oXaZsCMP9LzhOCTv5Z_TE",
+      });
+      // const liquid5 = new hoverEffect({
+      //   parent: document.querySelector(".person"),
+      //   intensity: 0.5,
+      //   image1:
+      //     "https://live.staticflickr.com/65535/53545423390_d439b3490f_n.jpg",
+      //   image2:
+      //     "https://live.staticflickr.com/65535/53545423395_91b1cb5e75_n.jpg",
+      //   displacementImage:
+      //     "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f19dc2f7-eebb-4bb0-9e32-f77d0b9301a1/dchk6qb-e81c8d02-e299-424d-a6b0-4dd25d911443.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2YxOWRjMmY3LWVlYmItNGJiMC05ZTMyLWY3N2QwYjkzMDFhMVwvZGNoazZxYi1lODFjOGQwMi1lMjk5LTQyNGQtYTZiMC00ZGQyNWQ5MTE0NDMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.vLtLaWoKAh3a_jKuDAIGp5oXaZsCMP9LzhOCTv5Z_TE",
+      // });
+    });
     const logo = (el) => {
       gsap.to(el, {
         duration: 0.4,
@@ -429,18 +533,33 @@ export default {
           "Skilled in backend development with PHP and MySQL, capable of building dynamic websites and web applications.",
       },
     ]);
-    const test = (el) => {
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: el,
-          start: "top top",
-          markers: true,
-          scrub: 8,
-          pin: true,
-        },
-      });
+    // const change = (el) => {
+    //   gsap.to(el, {
+    //     scrollTrigger: {
+    //       trigger: el,
+    //       start: "top top",
+    //       scrub: 4,
+    //       toggleClass: "change",
+    //       markers: true,
+    //     },
+
+    //     ease: "power4.out",
+    //     duration: 0.5,
+    //   });
+    // };
+    const items = ref([
+      { isOpen: false, number: "/001", text: "Speak" },
+      { isOpen: false, number: "/002", text: "Create Design" },
+      { isOpen: false, number: "/003", text: "Create Site" },
+      { isOpen: false, number: "/004", text: "Testing" },
+    ]);
+    const toggleCollapse = (index) => {
+      items.value[index].isOpen = !items.value[index].isOpen;
     };
+
     return {
+      items,
+      toggleCollapse,
       logo,
       rotate,
       intro,
@@ -455,7 +574,6 @@ export default {
       viewBefore,
       view,
       skills,
-      test,
     };
   },
 };
