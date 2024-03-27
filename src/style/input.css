@@ -12,7 +12,7 @@ body {
   width: 100%;
   height: 100%;
 }
-.yes {
+.no {
   font-family: "Druk Wide Bold", sans-serif;
 }
 .stroke-text {
@@ -44,4 +44,13 @@ body {
 }
 .input::placeholder {
   color: white;
+}
+.gradient {
+  background: rgb(185, 192, 195);
+  background: linear-gradient(
+    90deg,
+    rgba(185, 192, 195, 1) 0%,
+    rgba(233, 230, 235, 1) 50%,
+    rgba(182, 184, 188, 1) 100%
+  );
 }

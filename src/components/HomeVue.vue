@@ -1,5 +1,25 @@
 <template>
-  <main class="w-full h-screen yes">
+  <main class="w-full h-screen no">
+    <div
+      class="text-black text-lg w-full h-full bg-gray-50 flex justify-center items-center fixed z-50"
+      v-if="mount"
+    >
+      <transition-group
+        appear
+        @before-enter="letterBefore"
+        @enter="letter"
+        tag="div"
+      >
+        <span
+          v-for="(letter, index) in letters"
+          :data-index="index"
+          :key="letter.id"
+          class="mr-4"
+        >
+          <span class="text-4xl">{{ letter.let }}</span>
+        </span>
+      </transition-group>
+    </div>
     <nav
       class="w-full h-20 text-white uppercase flex justify-between items-center font-bold text-3xl p-12 relative top-4"
     >
@@ -9,6 +29,7 @@
 
       <div class="tracking-widest">...</div>
     </nav>
+
     <section class="w-full h-screen">
       <Transition appear @enter="intro" @before-enter="introBefore">
         <div
@@ -310,13 +331,23 @@
 
 <script>
 import { gsap } from "gsap";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onBeforeMount } from "vue";
 import hoverEffect from "hover-effect";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 export default {
   setup() {
+    const mount = ref(true);
+    const overflowStyle = ref("visible");
     gsap.registerPlugin(ScrollTrigger);
+
     onMounted(() => {
+      console.log("on mount");
+      setTimeout(() => {
+        mount.value = false;
+      }, 5500);
+      setTimeout(() => {
+        overflowStyle.value = "hidden";
+      }, 6000);
       const liquid1 = new hoverEffect({
         parent: document.querySelector(".wrapper1"),
         intensity: 0.5,
@@ -373,7 +404,7 @@ export default {
       gsap.to(el, {
         duration: 0.4,
         right: 0,
-
+        delay: 6,
         ease: "sine.in",
       });
     };
@@ -382,7 +413,7 @@ export default {
         rotate: 360,
         duration: 20,
         repeat: -1,
-
+        delay: 6,
         ease: "sine.in",
       });
     };
@@ -395,7 +426,7 @@ export default {
         y: 0,
         opacity: 1,
         duration: 0.5,
-
+        delay: 6,
         ease: "power1.in",
       });
     };
@@ -404,7 +435,7 @@ export default {
         yPercent: 100,
         opacity: 1,
         duration: 0.4,
-        delay: 0.5,
+        delay: 6,
         ease: "power1.in",
       });
     };
@@ -437,10 +468,22 @@ export default {
       gsap.to(el, {
         transform: "translateY(0px)",
         duration: 0.5,
-        ease: "power1.in",
+        ease: "bounce.in",
         opacity: 1,
-
-        delay: el.dataset.index * 0.4,
+        delay: 6 + el.dataset.index * 0.3,
+      });
+    };
+    const letterBefore = (el) => {
+      el.style.transform = "translateY(50px)";
+      el.style.opacity = 0;
+    };
+    const letter = (el) => {
+      gsap.to(el, {
+        transform: "translateY(0px)",
+        duration: 0.5,
+        ease: "bounce.in",
+        opacity: 1,
+        delay: el.dataset.index * 0.3,
       });
     };
     const workBefore = (el) => {
@@ -556,8 +599,30 @@ export default {
     const toggleCollapse = (index) => {
       items.value[index].isOpen = !items.value[index].isOpen;
     };
-
+    const letters = ref([
+      { let: "L", id: 1 },
+      { let: "o", id: 2 },
+      { let: "a", id: 3 },
+      { let: "d", id: 4 },
+      { let: "i", id: 5 },
+      { let: "n", id: 6 },
+      { let: "g", id: 7 },
+      { let: "P", id: 8 },
+      { let: "a", id: 9 },
+      { let: "g", id: 10 },
+      { let: "e", id: 11 },
+      { let: ".", id: 12 },
+      { let: ".", id: 13 },
+      { let: ".", id: 14 },
+      { let: ".", id: 15 },
+      { let: ".", id: 16 },
+    ]);
     return {
+      overflowStyle,
+      letterBefore,
+      letter,
+      letters,
+      mount,
       items,
       toggleCollapse,
       logo,
